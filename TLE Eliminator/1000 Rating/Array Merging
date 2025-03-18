@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define int long long
+#define pb push_back
+#define vec vector<int>
+#define ff first 
+#define ss second
+#define ppb pop_back
+#define lb lower_bound
+#define ub upper_bound
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a/(__gcd(a,b)))*b
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,b,a) for(int i=b-1;i>=a;i--)
+#define float long double
+#define cin(v) for(auto &i:v){cin>>i;}
+#define all(a) a.begin(),a.end()
+#define sort(v) stable_sort(all(v));
+
+void print(vector<int> v){
+    for(int i: v) cout<<i<<" ";
+    cout<<endl;
+}
+
+void solve(){
+int n;cin>>n;
+vec v1(n,0);cin(v1);
+v1.pb(1000000);
+vec v2(n,0);cin(v2);
+v2.pb(1000000);
+map<int,int>mp1,mp2;
+int ans1=0;
+int ans2=0;
+f(i,0,n){
+	if(v1[i]==v1[i+1]){
+		ans1++;
+	}
+	if(v2[i]==v2[i+1]){
+		ans2++;
+	}
+	if(v1[i]!=v1[i+1]){
+		mp1[v1[i]] = max(mp1[v1[i]],ans1+1);
+		ans1=0;
+	}
+	if(v2[i]!=v2[i+1]){
+		mp2[v2[i]] = max(mp2[v2[i]],ans2+1);
+		ans2=0;
+	}
+}
+int Max=0;
+for(auto i: mp1){
+  int a = i.second+mp2[i.first];
+  if(Max<a){
+  	Max=a;
+  }
+  //cout<<i.first<<" "<<i.second<<endl;
+}
+
+for(auto i: mp2){
+	int a = i.second;
+	  if(Max<a){
+  	   Max=a;
+  }
+}
+cout<<Max<<endl;
+
+}
+
+signed main(){
+	fast ;
+	int tc=1;
+	cin>>tc;
+	while(tc--){
+		solve();
+	}
+		
+}
